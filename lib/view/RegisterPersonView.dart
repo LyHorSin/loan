@@ -261,8 +261,8 @@ class _RegisterPersonViewState extends State<RegisterPersonView> {
                                 DateTime? picker = await showDatePicker(
                                   context: context,
                                   initialDate: DateTime.now(),
-                                  firstDate: DateTime(2000),
-                                  lastDate: DateTime(2100),
+                                  firstDate: DateTime(1000),
+                                  lastDate: DateTime(3100),
                                 );
                                 if (picker != null) {
                                   var format =
