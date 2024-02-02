@@ -15,6 +15,7 @@ class RegisterPersonView extends StatefulWidget {
 class _RegisterPersonViewState extends State<RegisterPersonView> {
   var _person = Person();
 
+  final _branchController = TextEditingController();
   final _nameController = TextEditingController();
   final _latinController = TextEditingController();
   final _phoneController = TextEditingController();
@@ -30,6 +31,7 @@ class _RegisterPersonViewState extends State<RegisterPersonView> {
     if (widget.person != null) {
       _person = widget.person!;
 
+      final branch = _person.branch ?? "";
       final englishName = _person.name ?? "";
       final latin = _person.latin ?? "";
       final phone = _person.phone ?? "";
@@ -38,6 +40,7 @@ class _RegisterPersonViewState extends State<RegisterPersonView> {
       final comment = _person.comment ?? "";
       final job = _person.job ?? "";
 
+      _branchController.text = branch;
       _nameController.text = englishName;
       _latinController.text = latin;
       _phoneController.text = phone;
@@ -78,6 +81,7 @@ class _RegisterPersonViewState extends State<RegisterPersonView> {
   }
 
   void _validatForm() {
+    final branch = _person.branch ?? "";
     final englishName = _person.name ?? "";
     final latin = _person.latin ?? "";
     final birthDay = _person.birthDay ?? "";
@@ -89,7 +93,9 @@ class _RegisterPersonViewState extends State<RegisterPersonView> {
     final job = _person.job ?? "";
     final status = _person.status ?? "";
 
-    if (englishName.isEmpty) {
+    if (branch.isEmpty) {
+      _showErrorMessage("សាខា", "សូមបំពេញសាខា");
+    } else if (englishName.isEmpty) {
       _showErrorMessage("ឈ្មោះជាភាសាខ្មែរ", "សូមបំពេញឈ្មោះជាភាសាខ្មែរ");
     } else if (latin.isEmpty) {
       _showErrorMessage("ឈ្មោះជាឡាតាំង", "សូមបំពេញឈ្មោះជាឡាតាំង");
@@ -174,6 +180,29 @@ class _RegisterPersonViewState extends State<RegisterPersonView> {
                       color: Colors.pink,
                     ),
                   ),
+                ),
+                const Text(
+                  "សាខា",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                  ),
+                ),
+                TextField(
+                  controller: _branchController,
+                  cursorColor: Colors.pink,
+                  decoration: InputDecoration(
+                    fillColor: Colors.white,
+                    filled: true,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                  ),
+                  style: const TextStyle(height: 44.0 / 44.0),
+                  onChanged: (text) {
+                    _person.branch = text;
+                    setState(() {});
+                  },
                 ),
                 const SizedBox(height: 20),
                 const Text(

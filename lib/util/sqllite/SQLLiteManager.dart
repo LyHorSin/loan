@@ -1,4 +1,3 @@
-
 import 'package:managementteam/model/User.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -9,6 +8,8 @@ enum SQLDataType { text, integer }
 
 class SQLLiteManager {
   static final share = SQLLiteManager();
+
+  int dbVersion = 2;
 
   Future<Database>? database;
   User? user;
@@ -23,20 +24,14 @@ class SQLLiteManager {
         db.execute(
             'CREATE TABLE person(id INTEGER PRIMARY KEY AUTOINCREMENT,user_id INTEGER ,name TEXT,latin TEXT,sex TEXT,phone TEXT,address TEXT,job_title TEXT,status TEXT,current_address TEXT,comment TEXT,birth_day DATE)');
       },
-      version: 1,
+      onUpgrade: _onUpgrade,
+      version: dbVersion,
     );
   }
 
-  Future<void> insertColumn(
-      SQLTable table, String column, SQLDataType type) async {
-    var db = await database;
-
-    var objects = await share.objects(table);
-    var keys = objects?.first.keys ?? [];
-    if (!keys.contains(column)) {
-      await db?.execute(
-        "ALTER TABLE ${table.name} ADD COLUMN $column ${type.name};",
-      );
+  void _onUpgrade(Database db, int oldVersion, int newVersion) async {
+    if (newVersion > oldVersion) {
+      await db.execute('ALTER TABLE person ADD COLUMN branch TEXT');
     }
   }
 
