@@ -9,7 +9,7 @@ enum SQLDataType { text, integer }
 class SQLLiteManager {
   static final share = SQLLiteManager();
 
-  int dbVersion = 2;
+  int dbVersion = 3;
 
   Future<Database>? database;
   User? user;
@@ -24,15 +24,32 @@ class SQLLiteManager {
         db.execute(
             'CREATE TABLE person(id INTEGER PRIMARY KEY AUTOINCREMENT,user_id INTEGER ,name TEXT,latin TEXT,sex TEXT,phone TEXT,address TEXT,job_title TEXT,status TEXT,current_address TEXT,comment TEXT,birth_day DATE)');
       },
-      onUpgrade: _onUpgrade,
       version: dbVersion,
+      onUpgrade: (db, oldVersion, newVersion) {
+        _onUpgrade(db, oldVersion, newVersion);
+      },
     );
   }
 
   void _onUpgrade(Database db, int oldVersion, int newVersion) async {
-    if (newVersion > oldVersion) {
-      await db.execute('ALTER TABLE person ADD COLUMN branch TEXT');
+    Batch batch = db.batch();
+
+    List<String> newColumns = [
+      'branch TEXT',
+      'address_village TEXT',
+      'address_district TEXT',
+      'address_commune TEXT',
+      'address_province TEXT',
+      'current_village TEXT',
+      'current_district TEXT',
+      'current_commune TEXT',
+      'current_province TEXT',
+    ];
+
+    for (String column in newColumns) {
+      batch.execute('ALTER TABLE person ADD COLUMN $column');
     }
+    batch.commit(noResult: true); // ignore the result for better performance
   }
 
   Future<void> delete(SQLTable table, int id) async {

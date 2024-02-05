@@ -16,12 +16,23 @@ class Person {
   String? phone;
   String? sex;
   String? latin;
-  String? address;
-  String? currentAddress;
+
   String? job;
   String? status;
   String? comment;
   String? branch;
+  // current address
+  String? currentAddress;
+  String? currentVillage;
+  String? currentCommune;
+  String? currentDistrict;
+  String? currentProvince;
+  // Birth Address
+  String? address;
+  String? addressVillage;
+  String? addressCommune;
+  String? addressDistrict;
+  String? addressProvince;
 
   Person({
     this.id,
@@ -32,7 +43,15 @@ class Person {
     this.sex,
     this.latin,
     this.address,
+    this.addressVillage,
+    this.addressDistrict,
+    this.addressCommune,
+    this.addressProvince,
     this.currentAddress,
+    this.currentVillage,
+    this.currentDistrict,
+    this.currentCommune,
+    this.currentProvince,
     this.job,
     this.status,
     this.comment,
@@ -48,7 +67,15 @@ class Person {
         sex: json["sex"],
         latin: json["latin"],
         address: json["address"],
+        addressVillage: json["address_village"],
+        addressDistrict: json["address_district"],
+        addressCommune: json["address_commune"],
+        addressProvince: json["address_province"],
         currentAddress: json["current_address"],
+        currentVillage: json["current_village"],
+        currentDistrict: json["current_district"],
+        currentCommune: json["current_commune"],
+        currentProvince: json["current_province"],
         comment: json["comment"],
         job: json["job_title"],
         status: json["status"],
@@ -64,7 +91,15 @@ class Person {
         "phone": phone,
         "sex": sex,
         "branch": branch,
+        "address_village": addressVillage,
+        "address_district": addressDistrict,
+        "address_commune": addressCommune,
+        "address_province": addressProvince,
         "address": address,
+        "current_village": currentVillage,
+        "current_district": currentDistrict,
+        "current_commune": currentCommune,
+        "current_province": currentProvince,
         "current_address": currentAddress,
         "comment": comment,
         "job_title": job,

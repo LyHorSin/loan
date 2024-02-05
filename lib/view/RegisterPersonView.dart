@@ -20,7 +20,19 @@ class _RegisterPersonViewState extends State<RegisterPersonView> {
   final _latinController = TextEditingController();
   final _phoneController = TextEditingController();
   final _addressController = TextEditingController();
-  final _currentAddressController = TextEditingController();
+
+  // Current Address
+  final _currentVillageController = TextEditingController();
+  final _currentCommuneController = TextEditingController();
+  final _currentDistrictController = TextEditingController();
+  final _currentProvinceController = TextEditingController();
+
+  // birth Address
+  final _addressVillageController = TextEditingController();
+  final _addressCommuneController = TextEditingController();
+  final _addressDistrictController = TextEditingController();
+  final _addressProvinceController = TextEditingController();
+
   final _commendController = TextEditingController();
   final _jobController = TextEditingController();
 
@@ -36,16 +48,36 @@ class _RegisterPersonViewState extends State<RegisterPersonView> {
       final latin = _person.latin ?? "";
       final phone = _person.phone ?? "";
       final address = _person.address ?? "";
-      final currentAddress = _person.currentAddress ?? "";
       final comment = _person.comment ?? "";
       final job = _person.job ?? "";
+
+      // birth address
+      final addressVillage = _person.addressVillage ?? "";
+      final addressDistrict = _person.addressDistrict ?? "";
+      final addressCommune = _person.addressCommune ?? "";
+      final addressProvince = _person.addressProvince ?? "";
+
+      _addressVillageController.text = addressVillage;
+      _addressDistrictController.text = addressDistrict;
+      _addressCommuneController.text = addressCommune;
+      _addressProvinceController.text = addressProvince;
+
+      // current address
+      final currentVillage = _person.currentVillage ?? "";
+      final currentDistrict = _person.currentDistrict ?? "";
+      final currentCommune = _person.currentCommune ?? "";
+      final currentProvince = _person.currentProvince ?? "";
+
+      _currentVillageController.text = currentVillage;
+      _currentDistrictController.text = currentDistrict;
+      _currentCommuneController.text = currentCommune;
+      _currentProvinceController.text = currentProvince;
 
       _branchController.text = branch;
       _nameController.text = englishName;
       _latinController.text = latin;
       _phoneController.text = phone;
       _addressController.text = address;
-      _currentAddressController.text = currentAddress;
       _commendController.text = comment;
       _jobController.text = job;
     }
@@ -58,19 +90,33 @@ class _RegisterPersonViewState extends State<RegisterPersonView> {
     final birthDay = _person.birthDay ?? "";
     final sex = _person.sex ?? "";
     final phone = _person.phone ?? "";
-    final addresss = _person.address ?? "";
-    final currentAddress = _person.currentAddress ?? "";
     final comment = _person.comment ?? "";
     final job = _person.job ?? "";
     final status = _person.status ?? "";
+
+    final addressVillage = _person.addressVillage ?? "";
+    final addressDistrict = _person.addressDistrict ?? "";
+    final addressCommune = _person.addressCommune ?? "";
+    final addressProvince = _person.addressProvince ?? "";
+
+    final currentVillage = _person.currentVillage ?? "";
+    final currentDistrict = _person.currentDistrict ?? "";
+    final currentCommune = _person.currentCommune ?? "";
+    final currentProvince = _person.currentProvince ?? "";
 
     if (englishName.isEmpty ||
         latin.isEmpty ||
         birthDay.isEmpty ||
         sex.isEmpty ||
         phone.isEmpty ||
-        addresss.isEmpty ||
-        currentAddress.isEmpty ||
+        addressVillage.isEmpty ||
+        addressDistrict.isEmpty ||
+        addressCommune.isEmpty ||
+        addressProvince.isEmpty ||
+        currentVillage.isEmpty ||
+        currentDistrict.isEmpty ||
+        currentCommune.isEmpty ||
+        currentProvince.isEmpty ||
         comment.isEmpty ||
         job.isEmpty ||
         status.isEmpty) {
@@ -87,11 +133,19 @@ class _RegisterPersonViewState extends State<RegisterPersonView> {
     final birthDay = _person.birthDay ?? "";
     final sex = _person.sex ?? "";
     final phone = _person.phone ?? "";
-    final addresss = _person.address ?? "";
-    final currentAddress = _person.currentAddress ?? "";
     final comment = _person.comment ?? "";
     final job = _person.job ?? "";
     final status = _person.status ?? "";
+
+    final addressVillage = _person.addressVillage ?? "";
+    final addressDistrict = _person.addressDistrict ?? "";
+    final addressCommune = _person.addressCommune ?? "";
+    final addressProvince = _person.addressProvince ?? "";
+
+    final currentVillage = _person.currentVillage ?? "";
+    final currentDistrict = _person.currentDistrict ?? "";
+    final currentCommune = _person.currentCommune ?? "";
+    final currentProvince = _person.currentProvince ?? "";
 
     if (branch.isEmpty) {
       _showErrorMessage("សាខា", "សូមបំពេញសាខា");
@@ -105,10 +159,22 @@ class _RegisterPersonViewState extends State<RegisterPersonView> {
       _showErrorMessage("ភេទ", "សូមបំពេញភេទ");
     } else if (phone.isEmpty) {
       _showErrorMessage("លេខទំនាក់ទំនង", "សូមបំពេញលេខទំនាក់ទំនង");
-    } else if (addresss.isEmpty) {
-      _showErrorMessage("ទីកន្លែងកំណើត", "សូមបំពេញទីកន្លែងកំណើត");
-    } else if (currentAddress.isEmpty) {
-      _showErrorMessage("លំនៅឋានបច្ទុប្បន្ន", "សូមបំពេញលំនៅឋានបច្ទុប្បន្ន");
+    } else if (addressVillage.isEmpty) {
+      _showErrorMessage("ទីកន្លែងកំណើត", "សូមបំពេញភូមិ");
+    } else if (addressDistrict.isEmpty) {
+      _showErrorMessage("ទីកន្លែងកំណើត", "សូមបំពេញឃុំ");
+    } else if (addressCommune.isEmpty) {
+      _showErrorMessage("ទីកន្លែងកំណើត", "សូមបំពេញស្រុក/ខណ្ឌ");
+    } else if (addressProvince.isEmpty) {
+      _showErrorMessage("ទីកន្លែងកំណើត", "សូមបំពេញខេត្ត/រាជធានី");
+    } else if (currentVillage.isEmpty) {
+      _showErrorMessage("លំនៅឋានបច្ទុប្បន្ន", "សូមបំពេញភូមិ");
+    } else if (currentDistrict.isEmpty) {
+      _showErrorMessage("លំនៅឋានបច្ទុប្បន្ន", "សូមបំពេញឃុំ");
+    } else if (currentCommune.isEmpty) {
+      _showErrorMessage("លំនៅឋានបច្ទុប្បន្ន", "សូមបំពេញស្រុក/ខណ្ឌ");
+    } else if (currentProvince.isEmpty) {
+      _showErrorMessage("លំនៅឋានបច្ទុប្បន្ន", "សូមបំពេញខេត្ត/រាជធានី");
     } else if (job.isEmpty) {
       _showErrorMessage("មុខរបរ", "សូមបំពេញមុខរបរ");
     } else if (status.isEmpty) {
@@ -224,8 +290,9 @@ class _RegisterPersonViewState extends State<RegisterPersonView> {
                   ),
                   style: const TextStyle(height: 44.0 / 44.0),
                   onChanged: (text) {
-                    _person.name = text;
-                    setState(() {});
+                    setState(() {
+                      _person.name = text;
+                    });
                   },
                 ),
                 const SizedBox(height: 10),
@@ -248,7 +315,9 @@ class _RegisterPersonViewState extends State<RegisterPersonView> {
                   ),
                   style: const TextStyle(height: 44.0 / 44.0),
                   onChanged: (text) {
-                    _person.latin = text;
+                    setState(() {
+                      _person.latin = text;
+                    });
                   },
                 ),
                 const SizedBox(height: 10),
@@ -365,8 +434,9 @@ class _RegisterPersonViewState extends State<RegisterPersonView> {
                   ),
                   style: const TextStyle(height: 44.0 / 44.0),
                   onChanged: (text) {
-                    _person.phone = text;
-                    setState(() {});
+                    setState(() {
+                      _person.phone = text;
+                    });
                   },
                 ),
                 const SizedBox(height: 10),
@@ -377,44 +447,289 @@ class _RegisterPersonViewState extends State<RegisterPersonView> {
                     fontSize: 14,
                   ),
                 ),
-                TextField(
-                  controller: _addressController,
-                  cursorColor: Colors.pink,
-                  decoration: InputDecoration(
-                    fillColor: Colors.white,
-                    filled: true,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            "ភូមិ",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                            ),
+                          ),
+                          TextField(
+                            controller: _addressVillageController,
+                            cursorColor: Colors.pink,
+                            decoration: InputDecoration(
+                              fillColor: Colors.white,
+                              filled: true,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                            ),
+                            style: const TextStyle(height: 44.0 / 44.0),
+                            onChanged: (text) {
+                              setState(() {
+                                _person.addressVillage = text;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  style: const TextStyle(height: 44.0 / 44.0),
-                  onChanged: (text) {
-                    _person.address = text;
-                  },
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            "ឃុំ",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                            ),
+                          ),
+                          TextField(
+                            controller: _addressDistrictController,
+                            cursorColor: Colors.pink,
+                            decoration: InputDecoration(
+                              fillColor: Colors.white,
+                              filled: true,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                            ),
+                            style: const TextStyle(height: 44.0 / 44.0),
+                            onChanged: (text) {
+                              setState(() {
+                                _person.addressDistrict = text;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            "ស្រុក/ខណ្ឌ",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                            ),
+                          ),
+                          TextField(
+                            controller: _addressCommuneController,
+                            cursorColor: Colors.pink,
+                            decoration: InputDecoration(
+                              fillColor: Colors.white,
+                              filled: true,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                            ),
+                            style: const TextStyle(height: 44.0 / 44.0),
+                            onChanged: (text) {
+                              setState(() {
+                                _person.addressCommune = text;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            "ខេត្ត/រាជធានី",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                            ),
+                          ),
+                          TextField(
+                            controller: _addressProvinceController,
+                            cursorColor: Colors.pink,
+                            decoration: InputDecoration(
+                              fillColor: Colors.white,
+                              filled: true,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                            ),
+                            style: const TextStyle(height: 44.0 / 44.0),
+                            onChanged: (text) {
+                              setState(() {
+                                _person.addressProvince = text;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 10),
                 const Text(
-                  "លំនៅឋានបច្ទុប្បន្ន",
+                  "ទីលំនៅបច្ទុប្បន្ន",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 14,
                   ),
                 ),
-                TextField(
-                  controller: _currentAddressController,
-                  cursorColor: Colors.pink,
-                  decoration: InputDecoration(
-                    fillColor: Colors.white,
-                    filled: true,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            "ភូមិ",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                            ),
+                          ),
+                          TextField(
+                            controller: _currentVillageController,
+                            cursorColor: Colors.pink,
+                            decoration: InputDecoration(
+                              fillColor: Colors.white,
+                              filled: true,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                            ),
+                            style: const TextStyle(height: 44.0 / 44.0),
+                            onChanged: (text) {
+                              setState(() {
+                                _person.currentVillage = text;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  style: const TextStyle(height: 44.0 / 44.0),
-                  onChanged: (text) {
-                    _person.currentAddress = text;
-                    setState(() {});
-                  },
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            "ឃុំ",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                            ),
+                          ),
+                          TextField(
+                            controller: _currentDistrictController,
+                            cursorColor: Colors.pink,
+                            decoration: InputDecoration(
+                              fillColor: Colors.white,
+                              filled: true,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                            ),
+                            style: const TextStyle(height: 44.0 / 44.0),
+                            onChanged: (text) {
+                              setState(() {
+                                _person.currentDistrict = text;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            "ស្រុក/ខណ្ឌ",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                            ),
+                          ),
+                          TextField(
+                            controller: _currentCommuneController,
+                            cursorColor: Colors.pink,
+                            decoration: InputDecoration(
+                              fillColor: Colors.white,
+                              filled: true,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                            ),
+                            style: const TextStyle(height: 44.0 / 44.0),
+                            onChanged: (text) {
+                              setState(() {
+                                _person.currentCommune = text;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            "ខេត្ត/រាជធានី",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                            ),
+                          ),
+                          TextField(
+                            controller: _currentProvinceController,
+                            cursorColor: Colors.pink,
+                            decoration: InputDecoration(
+                              fillColor: Colors.white,
+                              filled: true,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                            ),
+                            style: const TextStyle(height: 44.0 / 44.0),
+                            onChanged: (text) {
+                              setState(() {
+                                _person.currentProvince = text;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 10),
                 const Text(
@@ -436,8 +751,9 @@ class _RegisterPersonViewState extends State<RegisterPersonView> {
                   ),
                   style: const TextStyle(height: 44.0 / 44.0),
                   onChanged: (text) {
-                    _person.job = text;
-                    setState(() {});
+                    setState(() {
+                      _person.job = text;
+                    });
                   },
                 ),
                 const SizedBox(height: 10),
@@ -505,8 +821,9 @@ class _RegisterPersonViewState extends State<RegisterPersonView> {
                         border: InputBorder.none,
                       ),
                       onChanged: (text) {
-                        _person.comment = text;
-                        setState(() {});
+                        setState(() {
+                          _person.comment = text;
+                        });
                       },
                     ),
                   ),
@@ -534,6 +851,10 @@ class _RegisterPersonViewState extends State<RegisterPersonView> {
                       final id = _person.id;
                       final userId = SQLLiteManager.share.user?.id;
                       if (userId != null) {
+                        _person.address =
+                            "${_person.addressVillage} ${_person.addressCommune} ${_person.addressDistrict} ${_person.addressProvince}";
+                        _person.currentAddress =
+                            "${_person.currentVillage} ${_person.currentCommune} ${_person.currentDistrict} ${_person.currentProvince}";
                         _person.userId = userId;
                         if (id == null) {
                           SQLLiteManager.share
