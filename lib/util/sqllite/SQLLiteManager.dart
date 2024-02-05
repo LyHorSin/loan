@@ -9,7 +9,7 @@ enum SQLDataType { text, integer }
 class SQLLiteManager {
   static final share = SQLLiteManager();
 
-  int dbVersion = 3;
+  int dbVersion = 2;
 
   Future<Database>? database;
   User? user;
