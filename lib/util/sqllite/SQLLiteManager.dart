@@ -9,10 +9,34 @@ enum SQLDataType { text, integer }
 class SQLLiteManager {
   static final share = SQLLiteManager();
 
-  int dbVersion = 2;
+  int dbVersion = 1;
 
   Future<Database>? database;
   User? user;
+
+  List<String> columns = [
+    'id INTEGER PRIMARY KEY AUTOINCREMENT',
+    'user_id INTEGER',
+    'branch TEXT',
+    'name TEXT',
+    'latin TEXT',
+    'sex TEXT',
+    'phone TEXT',
+    'address TEXT',
+    'job_title TEXT',
+    'status TEXT',
+    'current_address TEXT',
+    'comment TEXT',
+    'birth_day DATE',
+    'address_village TEXT',
+    'address_district TEXT',
+    'address_commune TEXT',
+    'address_province TEXT',
+    'current_village TEXT',
+    'current_district TEXT',
+    'current_commune TEXT',
+    'current_province TEXT',
+  ];
 
   Future createDatabase() async {
     database = openDatabase(
@@ -21,8 +45,8 @@ class SQLLiteManager {
         'team_management.db',
       ),
       onCreate: (db, version) {
-        db.execute(
-            'CREATE TABLE person(id INTEGER PRIMARY KEY AUTOINCREMENT,user_id INTEGER ,name TEXT,latin TEXT,sex TEXT,phone TEXT,address TEXT,job_title TEXT,status TEXT,current_address TEXT,comment TEXT,birth_day DATE)');
+        String joinColumns = columns.join(",");
+        db.execute('CREATE TABLE person($joinColumns)');
       },
       version: dbVersion,
       onUpgrade: (db, oldVersion, newVersion) {
